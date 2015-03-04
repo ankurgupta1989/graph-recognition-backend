@@ -9,16 +9,16 @@ public class Node implements Serializable{
 
     private Integer identifier;
     private Integer value;
-    private String externalLabel;
+    private String label;
 
     public Node(Integer identifier) {
         this.identifier = identifier;
     }
 
-    public Node(Integer identifier, Integer value, String externalLabel) {
+    public Node(Integer identifier, Integer value, String label) {
         this.identifier = identifier;
         this.value = value;
-        this.externalLabel = externalLabel;
+        this.label = label;
     }
 
     public Integer getIdentifier() {
@@ -37,12 +37,12 @@ public class Node implements Serializable{
         this.value = value;
     }
 
-    public String getExternalLabel() {
-        return externalLabel;
+    public String getLabel() {
+        return label;
     }
 
-    public void setExternalLabel(String externalLabel) {
-        this.externalLabel = externalLabel;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Node implements Serializable{
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("{")
-               .append(this.getExternalLabel())
+               .append(this.getLabel())
                .append(", ")
                .append(this.getValue())
                .append("}");

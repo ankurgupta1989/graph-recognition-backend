@@ -1,4 +1,4 @@
-package graph_algorithms;
+package graphAlgorithms;
 
 import graph.Edge;
 import graph.Graph;
@@ -19,7 +19,7 @@ public class BFS implements RunAlgorithm<String, String> {
         String sourceVertex = map.get("source");
         Node startNode = null;
         for (Node node : G.keySet()) {
-            if (sourceVertex.equals(node.getExternalLabel())) {
+            if (sourceVertex.equals(node.getLabel())) {
                 startNode = node;
                 break;
             }
@@ -44,7 +44,7 @@ public class BFS implements RunAlgorithm<String, String> {
                 if (! used.contains(toVertex)) {
                     queue.add(toVertex);
                     used.add(toVertex);
-                    output.append(cur.toString() + " ----> " + toVertex.toString() + " via " + "{" + edge.getValue() + ", " + edge.getExternalLabel() + "}" );
+                    output.append(cur.toString() + " ----> " + toVertex.toString() + " via " + "{" + edge.getValue() + ", " + edge.getLabel() + "}" );
                     output.append("\n");
                 }
             }

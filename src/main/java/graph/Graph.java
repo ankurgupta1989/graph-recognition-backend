@@ -17,15 +17,15 @@ public class Graph  implements Serializable {
         this.graph = new HashMap<Node, List<Edge>>();
     }
 
-    public void addEdge(Integer fromVertex, Integer fromVertexValue, String fromExternalLabel,
-                        Integer toVertex, Integer toVertexValue, String toExternalLabel,
-                        Integer edgeValue, String lineExternalLabel) {
+    public void addEdge(Integer fromVertex, Integer fromVertexValue, String fromVertexLabel,
+                        Integer toVertex, Integer toVertexValue, String toVertexLabel,
+                        Integer edgeValue, String edgeLabel) {
 
-        Node fV = new Node(fromVertex, fromVertexValue, fromExternalLabel);
-        Node tV = new Node(toVertex, toVertexValue, toExternalLabel);
+        Node fV = new Node(fromVertex, fromVertexValue, fromVertexLabel);
+        Node tV = new Node(toVertex, toVertexValue, toVertexLabel);
 
         // Add edge in one direction.
-        Edge edge = new Edge(fV, tV, edgeValue, lineExternalLabel);
+        Edge edge = new Edge(fV, tV, edgeValue, edgeLabel);
         List<Edge> edgeList = graph.get(fV);
         if (edgeList == null) {
             edgeList = new ArrayList<Edge>();
@@ -34,7 +34,7 @@ public class Graph  implements Serializable {
         graph.put(fV, edgeList);
 
         // Add edge in other direction.
-        edge = new Edge(tV, fV, edgeValue, lineExternalLabel);
+        edge = new Edge(tV, fV, edgeValue, edgeLabel);
         edgeList = graph.get(tV);
         if (edgeList == null) {
             edgeList = new ArrayList<Edge>();
@@ -48,17 +48,6 @@ public class Graph  implements Serializable {
         return graph;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (obj == null) {
-//            return false;
-//        }
-//        if (! (obj instanceof Node)) {
-//            return false;
-//        }
-//        Graph other = (Graph) obj;
-//        return this.graph.equals(other.graph);
-//    }
 
 }
 

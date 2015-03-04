@@ -1,4 +1,4 @@
-package shape;
+package shapesAndRecognizers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -6,12 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by ankurgupta on 11/24/14.
  */
 public class Point {
-
     @JsonProperty
     private int X;
 
     @JsonProperty
     private int Y;
+    
+    @JsonProperty
+    private int time;
 
     public Point() {
 
@@ -20,11 +22,13 @@ public class Point {
     public Point(Point p) {
         this.X = p.getX();
         this.Y = p.getY();
+        this.time = p.getTime();
     }
 
-    public Point(int X, int Y) {
+    public Point(int X, int Y, int time) {
         this.X = X;
         this.Y = Y;
+        this.time = time;
     }
 
     public double getDistance(Point p) {
@@ -32,7 +36,6 @@ public class Point {
     }
 
     //************************* Getters and Setters ***********************************
-
 
     public int getX() {
         return X;
@@ -50,4 +53,11 @@ public class Point {
         Y = y;
     }
 
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 }

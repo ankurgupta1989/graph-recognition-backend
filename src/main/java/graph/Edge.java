@@ -11,14 +11,14 @@ public class Edge implements Serializable {
     private Node toVertex;
     private Node fromVertex;
     private Integer value;
-    private String externalLabel;
+    private String label;
 
 
-    public Edge(Node fromVertex, Node toVertex, Integer edgeNumber, String externalLabel) {
+    public Edge(Node fromVertex, Node toVertex, Integer edgeNumber, String label) {
         this.fromVertex = fromVertex;
         this.toVertex = toVertex;
         this.value = edgeNumber;
-        this.externalLabel = externalLabel;
+        this.label = label;
     }
 
     public Node getToVertex() {
@@ -45,12 +45,12 @@ public class Edge implements Serializable {
         this.value = value;
     }
 
-    public String getExternalLabel() {
-        return externalLabel;
+    public String getLabel() {
+        return label;
     }
 
-    public void setExternalLabel(String externalLabel) {
-        this.externalLabel = externalLabel;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
 

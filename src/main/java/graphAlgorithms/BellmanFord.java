@@ -1,4 +1,4 @@
-package graph_algorithms;
+package graphAlgorithms;
 
 /**
  * Created by ankurgupta on 12/13/14.

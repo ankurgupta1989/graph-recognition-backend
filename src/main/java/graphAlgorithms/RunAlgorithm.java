@@ -1,4 +1,4 @@
-package graph_algorithms;
+package graphAlgorithms;
 
 import graph.Graph;
 
