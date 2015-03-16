@@ -16,7 +16,7 @@ public interface GraphRecognizerInterface {
 
     public List<Shape> getAllShapes();
     
-    public void finish();
+    public void finish() throws RecognitionException;
     
     public Graph getGraph();
     

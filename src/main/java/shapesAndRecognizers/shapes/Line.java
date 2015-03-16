@@ -10,6 +10,10 @@ public class Line extends Shape {
     private Point startPoint;
     private Point endPoint;
     
+    public Line() {
+        this.identifier = "line";
+    }
+    
     public Point getStartPoint() {
         return startPoint;
     }

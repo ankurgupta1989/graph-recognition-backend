@@ -12,37 +12,45 @@ import java.util.Map;
 public class Graph  implements Serializable {
 
     private Map<Node, List<Edge>> graph;
+    private Map<String, Node> nodeIdentifier;
 
     public Graph() {
         this.graph = new HashMap<Node, List<Edge>>();
+        this.nodeIdentifier = new HashMap<String, Node>();
     }
 
-    public void addEdge(Integer fromVertex, Integer fromVertexValue, String fromVertexLabel,
-                        Integer toVertex, Integer toVertexValue, String toVertexLabel,
-                        Integer edgeValue, String edgeLabel) {
-
-        Node fV = new Node(fromVertex, fromVertexValue, fromVertexLabel);
-        Node tV = new Node(toVertex, toVertexValue, toVertexLabel);
-
+    public void addNode(String label, Integer value) {
+        Node node = new Node(value, label);
+        List<Edge> edgeList = new ArrayList<Edge>();
+        graph.put(node, edgeList);
+        nodeIdentifier.put(label, node);
+    }
+    
+    public void addUndirectedEdge(String fromLabel, String toLabel, String edgeLabel, Integer edgeValue) {
+        Node fromVertex = nodeIdentifier.get(fromLabel);
+        Node toVertex = nodeIdentifier.get(toLabel);
+        List<Edge> fromVertexEdgeList = graph.get(fromVertex);
+        List<Edge> toVertexEdgeList = graph.get(toVertex);
+        
         // Add edge in one direction.
-        Edge edge = new Edge(fV, tV, edgeValue, edgeLabel);
-        List<Edge> edgeList = graph.get(fV);
-        if (edgeList == null) {
-            edgeList = new ArrayList<Edge>();
-        }
-        edgeList.add(edge);
-        graph.put(fV, edgeList);
+        Edge edge = new Edge(fromVertex, toVertex, edgeValue, edgeLabel);
+        fromVertexEdgeList.add(edge);
 
         // Add edge in other direction.
-        edge = new Edge(tV, fV, edgeValue, edgeLabel);
-        edgeList = graph.get(tV);
-        if (edgeList == null) {
-            edgeList = new ArrayList<Edge>();
-        }
-        edgeList.add(edge);
-        graph.put(tV, edgeList);
+        edge = new Edge(toVertex, fromVertex, edgeValue, edgeLabel);
+        toVertexEdgeList.add(edge);
     }
 
+    public void addDirectedEdge(String fromLabel, String toLabel, String edgeLabel, Integer edgeValue) {
+        Node fromVertex = nodeIdentifier.get(fromLabel);
+        Node toVertex = nodeIdentifier.get(toLabel);
+        List<Edge> fromVertexEdgeList = graph.get(fromVertex);
+        List<Edge> toVertexEdgeList = graph.get(toVertex);
+
+        // Add edge in one direction.
+        Edge edge = new Edge(fromVertex, toVertex, edgeValue, edgeLabel);
+        fromVertexEdgeList.add(edge);
+    }
 
     public Map<Node, List<Edge>> getGraph() {
         return graph;

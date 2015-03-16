@@ -22,8 +22,7 @@ public class GraphRecognizerImplementation implements GraphRecognizerInterface {
         recognizerList.add(new LineRecognizer());
         recognizerList.add(new CircleRecognizer());
         recognizerList.add(new ArrowRecognizer());
-        recognizerList.add(new NumberRecognizer());
-        recognizerList.add(new CharacterRecognizer());
+        recognizerList.add(new NodeLabelAndValueRecognizer());
     }
     
     private List<Shape> shapeList;
@@ -50,6 +49,7 @@ public class GraphRecognizerImplementation implements GraphRecognizerInterface {
         if (shape == null) {
             throw new RecognitionException();
         }
+        this.shapeList.add(shape);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class GraphRecognizerImplementation implements GraphRecognizerInterface {
     }
 
     @Override
-    public void finish() {
+    public void finish() throws RecognitionException {
         this.graph = RecognitionUtility.recognizeGraph(shapeList);
     }
 

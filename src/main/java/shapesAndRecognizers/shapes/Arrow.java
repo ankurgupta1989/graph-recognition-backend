@@ -9,6 +9,10 @@ import shapesAndRecognizers.Shape;
 public class Arrow extends Shape {
     private Point startPoint;
     private Point endPoint;
+    
+    public Arrow() {
+        this.identifier = "arrow";
+    }
 
     public Point getStartPoint() {
         return startPoint;

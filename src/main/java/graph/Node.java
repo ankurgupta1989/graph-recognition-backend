@@ -7,26 +7,12 @@ import java.io.Serializable;
  */
 public class Node implements Serializable{
 
-    private Integer identifier;
     private Integer value;
     private String label;
 
-    public Node(Integer identifier) {
-        this.identifier = identifier;
-    }
-
-    public Node(Integer identifier, Integer value, String label) {
-        this.identifier = identifier;
+    public Node(Integer value, String label) {
         this.value = value;
         this.label = label;
-    }
-
-    public Integer getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(Integer identifier) {
-        this.identifier = identifier;
     }
 
     public Integer getValue() {
@@ -47,7 +33,7 @@ public class Node implements Serializable{
 
     @Override
     public int hashCode() {
-        return this.identifier;
+        return this.label.hashCode();
     }
 
     @Override
@@ -59,7 +45,7 @@ public class Node implements Serializable{
             return false;
         }
         Node node = (Node) obj;
-        return node.identifier.equals(this.identifier);
+        return node.label.equals(this.label);
     }
 
     @Override

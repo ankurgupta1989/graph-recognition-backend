@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Point {
     @JsonProperty
-    private int X;
+    private double X;
 
     @JsonProperty
-    private int Y;
+    private double Y;
     
     @JsonProperty
     private int time;
@@ -25,7 +25,7 @@ public class Point {
         this.time = p.getTime();
     }
 
-    public Point(int X, int Y, int time) {
+    public Point(double X, double Y, int time) {
         this.X = X;
         this.Y = Y;
         this.time = time;
@@ -34,22 +34,40 @@ public class Point {
     public double getDistance(Point p) {
         return Math.sqrt((X - p.X)*(X - p.X) + (Y - p.Y)*(Y - p.Y));
     }
+    
+    public Point getMedian(Point p) {
+        double medianX = (X + p.X)/2;
+        double medianY = (Y + p.Y)/2;
+        return new Point(medianX, medianY, 0);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (! (obj instanceof Point)) {
+            return false;
+        }
+        Point other = (Point) obj;
+        return other.X == this.X && other.Y == this.Y;
+    }
 
     //************************* Getters and Setters ***********************************
 
-    public int getX() {
+    public double getX() {
         return X;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         X = x;
     }
 
-    public int getY() {
+    public double getY() {
         return Y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         Y = y;
     }
 

@@ -31,8 +31,6 @@ public class BFS implements RunAlgorithm<String, String> {
         queue.add(startNode);
         used.add(startNode);
         assert startNode != null;
-//        output.append(startNode.toString());
-//        output.append("\n");
 
         while (! queue.isEmpty()) {
             Node cur = queue.poll();
@@ -44,7 +42,7 @@ public class BFS implements RunAlgorithm<String, String> {
                 if (! used.contains(toVertex)) {
                     queue.add(toVertex);
                     used.add(toVertex);
-                    output.append(cur.toString() + " ----> " + toVertex.toString() + " via " + "{" + edge.getValue() + ", " + edge.getLabel() + "}" );
+                    output.append(cur.getLabel() + " is connected to " + toVertex.getLabel() + " via "  + edge.getValue() + " hours flight");
                     output.append("\n");
                 }
             }

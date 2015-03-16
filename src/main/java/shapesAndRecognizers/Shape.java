@@ -5,7 +5,7 @@ package shapesAndRecognizers;
  */
 public class Shape {
     
-    private String identifier;
+    protected String identifier;
     
     private String type;
     
