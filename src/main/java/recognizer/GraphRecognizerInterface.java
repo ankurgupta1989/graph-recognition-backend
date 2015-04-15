@@ -5,7 +5,7 @@ import shapesAndRecognizers.RecognitionException;
 import shapesAndRecognizers.Shape;
 import shapesAndRecognizers.Stroke;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by ankurgupta on 11/24/14.
@@ -14,7 +14,9 @@ public interface GraphRecognizerInterface {
 
     public void classifyStroke(Stroke stroke) throws RecognitionException;
 
-    public List<Shape> getAllShapes();
+    public Collection<Shape> getAllShapes();
+    
+    public Collection<Stroke> getAllStrokes();
     
     public void finish() throws RecognitionException;
     

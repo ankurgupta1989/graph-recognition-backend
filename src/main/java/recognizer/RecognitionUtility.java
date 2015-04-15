@@ -6,13 +6,66 @@ import shapesAndRecognizers.RecognitionException;
 import shapesAndRecognizers.Shape;
 import shapesAndRecognizers.shapes.*;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by ankurgupta on 3/4/15.
  */
 public class RecognitionUtility {
 
+    public static void unmarkEdges(Collection<Shape> shapeList) {
+        for (Shape shape : shapeList) {
+            if (shape instanceof Line || shape instanceof Arrow) {
+                shape.setEffect("");
+            }
+        }
+    }
+    
+    public static boolean isLabellingCorrect(String label, Collection<Shape> shapeList) {
+        
+        for (Shape shape : shapeList) {
+            if (shape instanceof Line || shape instanceof Arrow) {
+                if (shape.getLabel().equals(label)) {
+                    if (! "bold".equals(shape.getEffect())) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    public static void markBoldEdges(String color, Collection<Shape> shapeList) {
+        for (Shape shape : shapeList) {
+            if (shape instanceof Line || shape instanceof Arrow) {
+                if ("bold".equals(shape.getEffect())) {
+                    shape.setEffect(color);
+                }
+            }
+        }
+    }
+    
+    public static void boldClosestEdge(Collection<Shape> shapeList, Point point) {
+        Shape closestShape = null;
+        double minDistance = Double.MAX_VALUE;
+        for (Shape shape : shapeList) {
+            if (shape instanceof Line) {
+                Line line = (Line) shape;
+                double thisMin = line.getDistance(point);
+                if (thisMin < minDistance) {
+                    closestShape = shape;
+                    minDistance = thisMin;
+                }
+            }
+        }
+        if (closestShape != null) {
+            closestShape.setEffect("bold");
+        }
+        
+    }
+    
     private static Point getPointToCompare(Shape shape) throws RecognitionException {
         Point pointToCompare = null;
         if (shape instanceof Circle) {
@@ -148,7 +201,13 @@ public class RecognitionUtility {
         // find all edges and associate it with corresponding nodes. Change the edge points for beautification.
         for (Shape shape : shapeList) {
             if (shape instanceof Line || shape instanceof Arrow) {
-                String lineLabel = findShapeLabel(shape, shapeList);
+//                String lineLabel = findShapeLabel(shape, shapeList);
+                
+                // TODO Remove the hack in the following lines.
+                String lineLabel = Integer.toString(new Random().nextInt());
+                shape.setLabel(lineLabel);
+                // Hack over
+                
                 Integer lineValue = findShapeValue(shape, shapeList);
                 Circle firstCircle = findNearestCircle(shape, shapeList, null);
                 Circle secondCircle = findNearestCircle(shape, shapeList, firstCircle);

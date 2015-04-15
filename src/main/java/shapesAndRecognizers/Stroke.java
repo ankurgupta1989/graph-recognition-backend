@@ -2,6 +2,7 @@ package shapesAndRecognizers;
 
 import shapesAndRecognizers.shapes.Rectangle;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,11 +11,15 @@ import java.util.List;
 public class Stroke {
 
     private List<Point> points;
+
+    private long timestamp;
+
+    private Integer identifier;
     
     public Stroke(List<Point> points) {
         this.points = points;
+        this.timestamp = new Date().getTime();
     }
-
 
     public Point getMean() {
         double xCenter = 0;
@@ -51,6 +56,16 @@ public class Stroke {
         return totalDistance;
     }
     
+    public double distance(Stroke stroke) {
+        double minDistance = Double.MAX_VALUE;
+        for (Point point : points) {
+            for (Point otherPoint : stroke.getPoints()) {
+                minDistance = Math.min(minDistance, point.getDistance(otherPoint));
+            }
+        }
+        return minDistance;
+    }
+    
     public Rectangle getBoundingBox() {
         
         double leftMost = Double.MAX_VALUE;
@@ -85,5 +100,21 @@ public class Stroke {
 
     public void setPoints(List<Point> points) {
         this.points = points;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Integer getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(Integer identifier) {
+        this.identifier = identifier;
     }
 }

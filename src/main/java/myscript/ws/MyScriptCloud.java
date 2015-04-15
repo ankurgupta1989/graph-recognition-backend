@@ -192,10 +192,10 @@ public class MyScriptCloud {
 		return response.toString();
 	}
 
-	public String addStroke(Stroke s) {
-		aggregator.add(s);
-
-		Stroke[] strokes = aggregator.toArray(new Stroke[aggregator.size()]);
+	public String addStroke(Stroke[] strokes) {
+//		aggregator.add(s);
+//
+//		Stroke[] strokes = aggregator.toArray(new Stroke[aggregator.size()]);
 		String recognized = null;
 		try {
 			recognized = recognize(strokes);

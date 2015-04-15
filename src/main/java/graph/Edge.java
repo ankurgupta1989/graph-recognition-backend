@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Created by ankurgupta on 11/24/14.
  */
-public class Edge implements Serializable {
+public class Edge implements Serializable, Comparable<Edge> {
 
     private Node toVertex;
     private Node fromVertex;
@@ -54,4 +54,8 @@ public class Edge implements Serializable {
     }
 
 
+    @Override
+    public int compareTo(Edge o) {
+        return this.getValue() - o.getValue();
+    }
 }

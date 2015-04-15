@@ -1,9 +1,11 @@
 package service;
 
+import graph.Edge;
 import graph.Graph;
-import graphAlgorithms.BFS;
+import graphAlgorithms.Kruskal;
 import recognizer.GraphRecognizerImplementation;
 import recognizer.GraphRecognizerInterface;
+import recognizer.RecognitionUtility;
 import service.input.RunAlgorithmRequest;
 import shapesAndRecognizers.Point;
 import shapesAndRecognizers.RecognitionException;
@@ -15,6 +17,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -44,14 +48,26 @@ public class RecognizerResource {
     }
 
     @POST
-    @Path("run_algorithm")
+    @Path("verify_MST")
     public synchronized String runAlgorithm(RunAlgorithmRequest request) {
         Graph graph = recognizer.getGraph();
-        String algorithmName = request.getAlgorithmName();
         StringBuilder output = new StringBuilder();
-        if ("bfs".equals(algorithmName)) {
-            BFS bfs = new BFS();
-            bfs.run(graph, request.getArguments(), output);
+        Collection<Shape> shapeList = recognizer.getAllShapes();
+        Kruskal kruskal = new Kruskal();
+        List<Edge> edgeList = new ArrayList<Edge>();
+        kruskal.run(graph, null, output, edgeList);
+        boolean isLabellingCorrect = true;
+        for (Edge edge : edgeList) {
+            if (! RecognitionUtility.isLabellingCorrect(edge.getLabel(), shapeList)) {
+                isLabellingCorrect = false;
+                break;
+            }
+        }
+        if (isLabellingCorrect) {
+            RecognitionUtility.markBoldEdges("green", shapeList);
+        }
+        else {
+            RecognitionUtility.markBoldEdges("red", shapeList);
         }
         return output.toString();
     }
@@ -64,8 +80,28 @@ public class RecognizerResource {
 
     @POST
     @Path("get_all_shapes")
-    public synchronized List<Shape> getAllShapes() {
+    public synchronized Collection<Shape> getAllShapes() {
         return recognizer.getAllShapes();
+    }
+    
+    @POST
+    @Path("get_all_strokes")
+    public synchronized Collection<Stroke> getAllStrokes() {
+        return recognizer.getAllStrokes();
+    }
+    
+    @POST
+    @Path("mark_edge")
+    public synchronized void markEdge(Point point) {
+        Collection<Shape> shapeList = recognizer.getAllShapes();
+        RecognitionUtility.boldClosestEdge(shapeList, point);
+    }
+    
+    @POST
+    @Path("unmark_edges")
+    public synchronized void unmarkEdges() {
+        Collection<Shape> shapeList = recognizer.getAllShapes();
+        RecognitionUtility.unmarkEdges(shapeList);
     }
 }
 

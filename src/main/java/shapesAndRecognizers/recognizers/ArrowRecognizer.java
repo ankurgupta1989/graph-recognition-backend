@@ -1,9 +1,6 @@
 package shapesAndRecognizers.recognizers;
 
-import shapesAndRecognizers.Point;
-import shapesAndRecognizers.RecognitionException;
-import shapesAndRecognizers.Recognizer;
-import shapesAndRecognizers.Stroke;
+import shapesAndRecognizers.*;
 import shapesAndRecognizers.shapes.Arrow;
 import shapesAndRecognizers.shapes.Line;
 
@@ -60,6 +57,11 @@ public class ArrowRecognizer implements Recognizer {
         arrow.setStartPoint(recognizedLine.getStartPoint());
         arrow.setEndPoint(recognizedLine.getEndPoint());
         return arrow;
+    }
+
+    @Override
+    public Shape recognizeList(List<Stroke> stroke) throws RecognitionException {
+        throw new RecognitionException();
     }
 
     private double getMaximumDistance(List<Point> remainingPoints, Line line, boolean side) {

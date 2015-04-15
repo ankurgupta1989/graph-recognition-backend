@@ -14,6 +14,18 @@ public class Rectangle extends Shape{
         this.identifier = "rectangle";
     }
     
+    public double size() {
+        double width = topRight.getX() - bottomLeft.getX();
+        double height = topRight.getY() - bottomLeft.getY();
+        return width*height;
+    }
+    
+    public double biggerDimension() {
+        double width = topRight.getX() - bottomLeft.getX();
+        double height = topRight.getY() - bottomLeft.getY();
+        return Math.max(width, height);
+    }
+    
     public Point getBottomLeft() {
         return bottomLeft;
     }

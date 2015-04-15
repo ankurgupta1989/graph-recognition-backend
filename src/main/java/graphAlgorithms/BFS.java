@@ -12,7 +12,7 @@ import java.util.*;
 public class BFS implements RunAlgorithm<String, String> {
 
     @Override
-    public void run(Graph graph, Map<String, String> map, StringBuilder output) {
+    public void run(Graph graph, Map<String, String> map, StringBuilder output, List<Edge> outedgeList) {
 
         Map<Node, List<Edge>> G = graph.getGraph();
 

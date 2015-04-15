@@ -9,6 +9,18 @@ public class Shape {
     
     private String type;
     
+    private String effect;
+
+    private String label;
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+    
     public String getIdentifier() {
         return identifier;
     }
@@ -24,6 +36,15 @@ public class Shape {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getEffect() {
+        return effect;
+    }
+
+    public void setEffect(String effect) {
+        this.effect = effect;
+    }
+
 
     @Override
     public boolean equals(Object obj) {

@@ -1,9 +1,6 @@
 package shapesAndRecognizers.recognizers;
 
-import shapesAndRecognizers.Point;
-import shapesAndRecognizers.RecognitionException;
-import shapesAndRecognizers.Recognizer;
-import shapesAndRecognizers.Stroke;
+import shapesAndRecognizers.*;
 import shapesAndRecognizers.shapes.Circle;
 
 import java.util.List;
@@ -21,7 +18,7 @@ public class CircleRecognizer implements Recognizer {
         Point center = stroke.getMean();
         List<Point> points = stroke.getPoints();
         double totalDistanceFromCenter = stroke.distanceFromPoint(center);
-        double radius = stroke.distanceFromPoint(center) / points.size();
+        double radius = totalDistanceFromCenter / points.size();
         double totalDistanceFromCenterDiff = 0;
         for (Point point : points) {
             totalDistanceFromCenterDiff += Math.abs(center.getDistance(point) - radius);
@@ -52,5 +49,10 @@ public class CircleRecognizer implements Recognizer {
         circle.setRadius(radius);
         return circle;
     }
-    
+
+    @Override
+    public Shape recognizeList(List<Stroke> stroke) throws RecognitionException {
+        throw new RecognitionException();
+    }
+
 }

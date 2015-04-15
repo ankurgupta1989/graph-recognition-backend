@@ -1,9 +1,6 @@
 package shapesAndRecognizers.recognizers;
 
-import shapesAndRecognizers.Point;
-import shapesAndRecognizers.RecognitionException;
-import shapesAndRecognizers.Recognizer;
-import shapesAndRecognizers.Stroke;
+import shapesAndRecognizers.*;
 import shapesAndRecognizers.shapes.Line;
 
 import java.util.List;
@@ -33,5 +30,10 @@ public class LineRecognizer implements Recognizer {
             return line;
         }
     }
-    
+
+    @Override
+    public Shape recognizeList(List<Stroke> stroke) throws RecognitionException {
+        throw new RecognitionException();
+    }
+
 }

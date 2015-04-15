@@ -9,6 +9,7 @@ import shapesAndRecognizers.Shape;
 public class Circle extends Shape {
     private double radius;
     private Point center;
+    private String label;
     
     public Circle() {
         this.identifier = "circle";
